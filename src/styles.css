@@ -2,6 +2,10 @@
   white-space: pre-line;
 }
 
+.react-flow__handle {
+  visibility: hidden;
+}
+
 .rhombusNode {
   position: relative;
   max-width: 125px;
