@@ -44,7 +44,6 @@ export default function Flowchart({ initialNodes = [] }: FlowchartProps) {
   const [edges, setEdges] = useState(initialEdges);
   const [rfInstance, setRfInstance] = useState<ReactFlowInstance | null>(null);
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
-  console.log(nodes);
 
   const onNodesChange: OnNodesChange = useCallback((changes) => setNodes((nds) => applyNodeChanges(changes, nds)), [setNodes]);
   const onEdgesChange: OnEdgesChange = useCallback((changes) => setEdges((eds) => applyEdgeChanges(changes, eds)), [setEdges]);
@@ -63,8 +62,6 @@ export default function Flowchart({ initialNodes = [] }: FlowchartProps) {
     if (node) {
       setSelectedNode(node);
     }
-
-    console.log(node);
   };
 
   const getPropertyPath = (obj: NestedObject, prop: string): string | null => {
@@ -95,7 +92,6 @@ export default function Flowchart({ initialNodes = [] }: FlowchartProps) {
     const newNodes = [...nodes];
     newNodes[nodeIndex] = node;
 
-    console.log(newNodes);
     setNodes(newNodes);
   }
 
