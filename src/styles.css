@@ -1,10 +1,16 @@
+body {
+  overflow: hidden;
+}
+
 .react-flow__node {
   white-space: pre-line;
 }
 
-.react-flow__handle {
-  visibility: hidden;
-}
+/* .react-flow__handle {
+  opacity: 0;
+  width: 0;
+  height: 0;
+} */
 
 .rhombusNode {
   position: relative;
@@ -26,6 +32,10 @@
   height: 100%; */
   border-radius: 4px;
   position: relative;
+}
+
+.react-flow__edge {
+  color: #000;
 }
 
 .rhombusNode-label span {
