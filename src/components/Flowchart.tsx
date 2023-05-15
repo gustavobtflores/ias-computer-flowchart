@@ -111,8 +111,8 @@ export default function Flowchart({ initialNodes = [] }: FlowchartProps) {
         fitView
         nodes={nodes}
         edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
+        onNodesChange={process.env.NODE_ENV === "development" ? onNodesChange : undefined}
+        onEdgesChange={process.env.NODE_ENV === "development" ? onEdgesChange : undefined}
         nodeTypes={nodeTypes}
         defaultEdgeOptions={{
           type: "step",
