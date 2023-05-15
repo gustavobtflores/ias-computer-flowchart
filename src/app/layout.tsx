@@ -4,7 +4,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Fluxograma de operação do IAS",
-  description: "Explore o fluxograma de operação do computador IAS",
+  description: "",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
