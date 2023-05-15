@@ -6,11 +6,12 @@ body {
   white-space: pre-line;
 }
 
-/* .react-flow__handle {
+.react-flow__handle {
   opacity: 0;
   width: 0;
   height: 0;
-} */
+  pointer-events: none;
+}
 
 .rhombusNode {
   position: relative;

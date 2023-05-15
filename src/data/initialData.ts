@@ -103,4 +103,9 @@ export const initialEdges: Edge[] = [
     source: "addmx",
     target: "addmx1",
   },
+  {
+    id: "addmx1-addmx2",
+    source: "addmx1",
+    target: "addmx2",
+  },
 ];
