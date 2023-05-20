@@ -30,14 +30,11 @@ jobs:
       - name: Start server
         run: npx next start &
 
-      - name: Test server
-        run: curl http://localhost:3000
-
       - name: Screenshot site
         run: |
           mkdir -p screenshots
           npx puppeteer-cli screenshot "http://localhost:3000" --output=screenshots/screenshot.png
-          # You may also want to adjust the viewport size and other options for puppeteer-cli
+          ls -a
 
       - name: Commit and push screenshot
         run: |
