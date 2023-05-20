@@ -1,20 +1,16 @@
 import { NextResponse } from "next/server";
 import clientPromise from "../../../config/mongodb";
 import { ObjectId } from "mongodb";
-import { Node } from "reactflow";
-
-interface NodeItem extends Node {
-  _id: ObjectId;
-}
 
 export async function POST(req: Request) {
   const client = await clientPromise;
   const db = client.db("flowchart");
   const collection = db.collection("nodes");
   const body = await req.json();
-  body.forEach((node: NodeItem) => {
+
+  body.forEach((node: { _id: any }) => {
     if (!node._id) {
-      node._id = new ObjectId();
+      node._id = new ObjectId().toString();
     }
   });
 

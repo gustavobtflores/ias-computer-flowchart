@@ -108,4 +108,35 @@ export const initialEdges: Edge[] = [
     source: "addmx1",
     target: "addmx2",
   },
+  {
+    id: "submx-submx1",
+    source: "submx",
+    target: "submx1",
+  },
+  {
+    id: "submx1-submx2",
+    source: "submx1",
+    target: "submx2",
+  },
+  {
+    id: "addmodmx-addmodmx1",
+    source: "addmodmx",
+    target: "addmodmx1",
+  },
+  {
+    id: "addmodmx1-addmodmx2",
+    source: "addmodmx1",
+    target: "addmodmx2",
+  },
+  {
+    id: "submodmx-submodmx1",
+    source: "submodmx",
+    target: "submodmx1",
+  },
+  {
+    id: "submodmx1-submodmx2",
+    source: "submodmx1",
+    target: "submodmx2",
+    animated: true,
+  },
 ];
