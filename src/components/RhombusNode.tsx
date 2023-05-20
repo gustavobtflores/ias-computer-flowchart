@@ -5,7 +5,7 @@ export default function RhombusNode({ data, id, width, height }: any) {
     <div className="rhombusNode" style={{ maxHeight: height, maxWidth: width }}>
       <div className="rhombusNode-label">
         <svg viewBox="0 0 100 100" style={{ display: "block", overflow: "visible" }}>
-          <path d="M0,50 L50,0 L100,50 L50,100 z" fill="#ffffff" stroke="#222222" stroke-width="1" strokeLinecap="round"></path>
+          <path d="M0,50 L50,0 L100,50 L50,100 z" fill="#ffffff" stroke="#222222" strokeWidth="1" strokeLinecap="round"></path>
         </svg>
         <span>{data.label}</span>
       </div>

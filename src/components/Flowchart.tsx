@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, use, useEffect, ChangeEvent } from "react";
+import { useState, useCallback, ChangeEvent, useEffect } from "react";
 import ReactFlow, {
   OnNodesChange,
   applyNodeChanges,
@@ -16,6 +16,7 @@ import ReactFlow, {
   addEdge,
   Connection,
   Position,
+  OnConnect,
 } from "reactflow";
 import RhombusNode from "./RhombusNode";
 import "reactflow/dist/style.css";
@@ -47,7 +48,19 @@ export default function Flowchart({ initialNodes = [] }: FlowchartProps) {
 
   const onNodesChange: OnNodesChange = useCallback((changes) => setNodes((nds) => applyNodeChanges(changes, nds)), [setNodes]);
   const onEdgesChange: OnEdgesChange = useCallback((changes) => setEdges((eds) => applyEdgeChanges(changes, eds)), [setEdges]);
-  const onConnect = useCallback((params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)), []);
+  const onConnect: OnConnect = useCallback((params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)), []);
+
+  const updateSelectedNode = useCallback(() => {
+    const node = nodes.find((node) => node.selected);
+
+    if (node) {
+      setSelectedNode(node);
+    }
+  }, [nodes]);
+
+  useEffect(() => {
+    updateSelectedNode();
+  }, [updateSelectedNode]);
 
   const onSave = useCallback(() => {
     if (rfInstance) {
@@ -55,14 +68,6 @@ export default function Flowchart({ initialNodes = [] }: FlowchartProps) {
       axios.post("/api", flow.nodes);
     }
   }, [rfInstance]);
-
-  const updateSelectedNode = () => {
-    const node = nodes.find((node) => node.selected);
-
-    if (node) {
-      setSelectedNode(node);
-    }
-  };
 
   const getPropertyPath = (obj: NestedObject, prop: string): string | null => {
     for (let key in obj) {
@@ -81,18 +86,16 @@ export default function Flowchart({ initialNodes = [] }: FlowchartProps) {
   };
 
   function handleNodeChange(event: ChangeEvent<HTMLInputElement>) {
-    const { value } = event.target;
+    const { value, id } = event.target;
     if (!selectedNode) return;
 
-    const name = getPropertyPath(selectedNode, event.target.id);
+    const name = getPropertyPath(selectedNode, id);
     const node = { ...selectedNode };
+    const nodeIndex = nodes.findIndex((node) => node.selected);
 
     assign(node, name, isNumber(value) ? Number(value) : value);
-    const nodeIndex = nodes.findIndex((node) => node.selected);
-    const newNodes = [...nodes];
-    newNodes[nodeIndex] = node;
 
-    setNodes(newNodes);
+    setNodes((nodes) => [...nodes.slice(0, nodeIndex), node, ...nodes.slice(nodeIndex + 1)]);
   }
 
   function newNode(id: string) {
@@ -117,7 +120,8 @@ export default function Flowchart({ initialNodes = [] }: FlowchartProps) {
         defaultEdgeOptions={{
           type: "step",
           labelShowBg: true,
-          labelBgStyle: { background: "#000000" },
+          labelBgStyle: { fill: "#dfdfdf" },
+          labelBgPadding: [4, 4],
           style: { stroke: "#1f1f1f" },
           markerEnd: { type: MarkerType.ArrowClosed, color: "#1f1f1f", width: 16, height: 16 },
         }}
@@ -144,7 +148,7 @@ export default function Flowchart({ initialNodes = [] }: FlowchartProps) {
                       ) : (
                         <>
                           <label htmlFor={key}>{key}</label>
-                          <input id={key} type="text" defaultValue={value} onChange={handleNodeChange} />
+                          <input key={key} id={key} type="text" placeholder={String(value)} onChange={handleNodeChange} />
                         </>
                       )}
                     </>
@@ -154,7 +158,6 @@ export default function Flowchart({ initialNodes = [] }: FlowchartProps) {
             )}
           </>
         )}
-
         <Background />
         <Controls />
       </ReactFlow>
