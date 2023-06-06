@@ -42,6 +42,20 @@ export const initialEdges: Edge[] = [
     sourceHandle: "leftins.left",
   },
   {
+    id: "leftins-getleftins",
+    source: "leftins",
+    target: "getleftins",
+    label: "Sim",
+    sourceHandle: "leftins.right",
+  },
+  {
+    id: "getleftins-pcinc",
+    source: "getleftins",
+    target: "pcinc",
+    sourceHandle: "getleftins.bottom",
+    targetHandle: "pcinc.right",
+  },
+  {
     id: "getrightins-pcinc",
     source: "getrightins",
     target: "pcinc",
@@ -137,6 +151,45 @@ export const initialEdges: Edge[] = [
     id: "submodmx1-submodmx2",
     source: "submodmx1",
     target: "submodmx2",
-    animated: true,
+  },
+  {
+    id: "submodmx2-submodmx3",
+    source: "submodmx2",
+    target: "submodmx3",
+  },
+  {
+    id: "addmodmx2-addmodmx3",
+    source: "addmodmx2",
+    target: "addmodmx3",
+  },
+  {
+    id: "mulmx-mulmx1",
+    source: "mulmx",
+    target: "mulmx1",
+  },
+  {
+    id: "mulmx1-mulmx2",
+    source: "mulmx1",
+    target: "mulmx2",
+  },
+  {
+    id: "divmx-divmx1",
+    source: "divmx",
+    target: "divmx1",
+  },
+  {
+    id: "divmx1-divmx2",
+    source: "divmx1",
+    target: "divmx2",
+  },
+  {
+    id: "lsh-lsh1",
+    source: "lsh",
+    target: "lsh1",
+  },
+  {
+    id: "rsh-rsh1",
+    source: "rsh",
+    target: "rsh1",
   },
 ];

@@ -109,7 +109,7 @@ export default function Flowchart({ initialNodes = [] }: FlowchartProps) {
   }
 
   return (
-    <div style={{ width: "100%", height: "100vh" }}>
+    <section style={{ width: "100%", height: "100vh" }}>
       <ReactFlow
         fitView
         nodes={nodes}
@@ -161,6 +161,6 @@ export default function Flowchart({ initialNodes = [] }: FlowchartProps) {
         <Background />
         <Controls />
       </ReactFlow>
-    </div>
+    </section>
   );
 }
